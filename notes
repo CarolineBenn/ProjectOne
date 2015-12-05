@@ -1,0 +1,87 @@
+ Project One: Javascript Game
+  **** Duck Hunt ****
+
+
+D   NEED
+2   Two player - each player takes turns. Player one can have   
+1   blue skies, player two orange (evening shoot?)
+1   Crosshair
+1   .click()
+3   Ducks (need to source gifs or make the ducks)
+    - Flying
+    - Falling
+    - Dead
+2   Score counter on the screen
+2   Foregrounds made with SVGs so they can be edited
+    - Tree
+    - Dirt
+    - grass
+  
+  
+D   WANT
+3   Dog
+1   Sound effects
+    - Quack
+    - Bark
+    - "Hey, there's ducks over here!"
+    - "Oh yeah!"
+2   Get sound effects to play at the correct times
+1   Players get to choose their colour
+  
+  
+D   NICE-TO-HAVE
+8   Responsive?!
+3   Menu
+5   Cheat-mode. Unlimited shots and hundreds of ducks..?
+    3 - DUCK DUCK GOOSE mode. Shoot the goose, get more points
+    5 - DUCK MANIA - hundreds of ducks, 50 bullets
+2   Seasonal - summer autumn winter
+3   Weather conditions - clouds floating past 
+    obscuring the ducks
+  
+  - DUCK
+  class="duck"
+  <div class="duck red"> || <div class="duck green">
+  
+  // .duck can be for all duck properties
+  // .duck.red or .duck.green for style
+  
+  - DOG
+  class="dog"
+  
+
+
+  **** BATTLESHIPS ****
+
+D   NEED  
+1   Board
+1   Pieces for the Board
+2   Five types of ship for each player
+ 
+
+D   WANT  
+5   To host on internet so two players can play at once, 
+    laptops back to back - just like the original!
+2   To have the same design as the original
+
+D   NICE TO HAVE  
+3   Explosions when a ship has been sunk
+
+
+**** THIRD GAME ****
+
+D   NEED
+
+D   WANT
+
+D   NICE TO HAVE
+
+
+
+
+
+
+
+
+
+

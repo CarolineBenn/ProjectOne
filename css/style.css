@@ -1,0 +1,66 @@
+body {
+  background: #555;
+}
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 0px #333;
+  font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+.row {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+#content {
+  background: #1a8fb9;
+
+  height: 550px;
+  margin: 0 auto;
+  box-shadow: 4px 4px 2px #333;
+}
+
+img.background {
+  position: absolute;
+  width: 880px;
+  height: 550px;
+  margin: 0 auto;
+  left: 100px;
+  transform: translateX(101px); 
+  z-index: 1;
+  opacity: 0.4;
+}
+
+
+img.duck {
+  width: 50px;
+  position: relative;
+  top: 90%;
+  /*
+  position: relative;
+  z-index: 1;
+  
+  display: inline-block;
+  padding: 30px; */
+}
+
+/* Background flash */
+
+.flash {
+    -webkit-animation-name: flash-animation;
+    -webkit-animation-duration: 0.2s;
+    animation-name: flash-animation;
+    animation-duration: 0.2s;
+}
+
+@-webkit-keyframes flash-animation {  
+    from { background: initial; }
+    to   { background: rgba(255,255,255,0.7); }
+}
+
+@keyframes flash-animation {  
+    from { background: initial; }
+    to   { background: rgba(255,255,255,0.7); }
+}
