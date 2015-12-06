@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-var singleDuck = $(".duck:nth-child(3)");
+var singleDuck = $(".duck");
 var flyAwayDuck = ({ "left" : "40%", "top":"-10%"});
    
 
@@ -44,6 +44,10 @@ $(".duck:nth-child(3)").animate({"left":"25%", "top":"60%" }, 1500, "swing").del
 // Duck 4
 $(".duck:nth-child(4)").animate({"left":"30%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"30%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"23%", "left":"1%"}, 1250, "swing").delay(600).animate(flyAwayDuck, 400, "swing");
 
+
+$(".duck").on("click", function() {
+  $(this).stop(true, true);
+})
 
 
 

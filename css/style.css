@@ -16,7 +16,7 @@ h1 {
 
 #content {
   background: #1a8fb9;
-
+  overflow: hidden;
   height: 550px;
   margin: 0 auto;
   box-shadow: 4px 4px 2px #333;
@@ -35,9 +35,11 @@ img.background {
 
 
 img.duck {
-  width: 50px;
+  width: 100px;
   position: relative;
   top: 90%;
+  padding: 30px;
+  border: 1px solid #333;
   /*
   position: relative;
   z-index: 1;
