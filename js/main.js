@@ -10,12 +10,6 @@ var singleDuck = $(".duck");
   });
 
 
-
-
-
-
-
-
 /*
   $('.content')
      .find('.duck:nth-child(2)')
@@ -51,7 +45,13 @@ $('.duck').click(function() {
 })
 */
 
-$(".duck:nth-child(1)").animate({"left":"85%", "top":"50%" }, "slow");
+
+
+$(".duck:nth-child(1)").animate({"left":"85%", "top":"50%" }, 2000).delay(1000).animate({"left":"50%", "top":"20%"}, 1000);
+
+
+
+$(".duck:nth-child(2)").animate({"left":"35%", "top":"50%" }, 2000);
 
 
 
