@@ -16,6 +16,9 @@ h2, h3, h4, h5, h6 {
   font-family: 'Press Start 2P', cursive;
   font-size: 1em;
 }
+h2 {
+  text-align: center;
+}
 
 .row {
   max-width: 1100px;
