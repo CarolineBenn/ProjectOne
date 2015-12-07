@@ -130,9 +130,12 @@ THIS KIND OF WORKS:
 $(".duck").click(function() {
   // debugger;
     var greenDucks = $("svg.duck-svg");
+
+
+
      for (i = 0; i < greenDucks.length; i++) {
        $(greenDucks[i]).css({"fill":"#0f0"});
-       // console.log(greenDucks);
+     // console.log(greenDucks);
      }
   });
 
@@ -142,14 +145,10 @@ $(".duck").click(function() {
 
 // WORKS  Score increments by 500 points every duck
 var duckScore = 0;
-  $(".duck").click(function() {
+  $(".duck").one("click", function() {
     duckScore += 500;
     $(".score").html(duckScore);
 })
-
-
-
-
 
 
 // When #content is clicked on, Bullet Counter goes down by one
