@@ -123,22 +123,29 @@ THIS KIND OF WORKS:
       i++;
       }
    });
-
 */
 
 /* THIS KIND OF WORKS: */
 
 $(".duck").click(function() {
-  debugger;
-  
+  // debugger;
     var greenDucks = $("svg.duck-svg");
      for (i = 0; i < greenDucks.length; i++) {
        $(greenDucks[i]).css({"fill":"#0f0"});
-     console.log(greenDucks);
+       // console.log(greenDucks);
      }
-     
   });
 
+
+
+
+
+// WORKS  Score increments by 500 points every duck
+var duckScore = 0;
+  $(".duck").click(function() {
+    duckScore += 500;
+    $(".score").html(duckScore);
+})
 
 
 
