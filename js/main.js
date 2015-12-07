@@ -8,15 +8,51 @@ var duckSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE svg PUBLIC "
 
 var bulletSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" class="bullet-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 372.166 372.166" style="enable-background:new 0 0 372.166 372.166;" xml:space="preserve"><g>  <path d="M163.583,97.152h-3.641c-0.569-28.537-5.443-56.891-14.508-84.368l-2.609-7.909C141.863,1.959,139.154,0,136.083,0    c-3.071,0-5.781,1.959-6.742,4.875l-2.609,7.909c-9.065,27.477-13.938,55.832-14.508,84.368h-3.641v48.075l-11.749,30.56v179.012    h78.497V175.787l-11.748-30.56V97.152z M152.583,108.312v32.676h-33v-32.676H152.583z M117.769,151.988h36.628l7.427,19.32h-51.483    L117.769,151.988z M136.083,19.621c7.997,25.302,12.312,51.338,12.856,77.532h-25.711 C123.771,70.958,128.086,44.923,136.083,19.621z M107.834,343.799V182.308h56.497v161.491H107.834z"/><rect x="96.834" y="361.166" width="78.497" height="11"/></g></svg>';
 
+// On click screen flashes
+$('#content').on("click", function() {
+    $('#content').addClass('flash');
+    setTimeout(function() {
+          $('#content').removeClass('flash');
+    }, 100);
+});
+
+var bullets = $("svg.bullet-svg") ;
+$("#content").on("click", function() {
+  console.log("You have " + bullets.length-- + " bullets left");
+ 
+  if (bullets.length === 0) {
+    $("#content").off("click");
+    $(".duck").off("click");
+  }
+})
 
 
-$('.ducks-to-shoot').append(duckSVG).append(duckSVG).append(duckSVG);
-$('.shots-left').append(bulletSVG).append(bulletSVG).append(bulletSVG);
 
 // Easy mode - Level One: Wave One
 
 
-function waveOne() {
+function waveOne(numOfDucks, numOfBullets) {
+
+  var duckScore = 0;
+  $(".duck").one("click", function() {
+    duckScore += 500;
+    numOfDucks = (duckScore / 500);
+    $(".score").html(duckScore);
+      var greenDucks = $("svg.duck-svg");
+        for (i = 0; i < numOfDucks; i++) {
+          $(greenDucks[i]).css({"fill":"#0f0"});
+       }
+    });
+
+    for (i = 0; i < numOfDucks; i++) {
+      $('.ducks-to-shoot').append(duckSVG);
+    }
+
+
+    for (i = 0; i < numOfDucks + 3; i++) {
+      $('.shots-left').append(bulletSVG);
+    }
+
   // Starting 
   $(singleDuck).css({"left": "30%"});
 
@@ -99,33 +135,8 @@ $(".duck").one("click", function() {
 }) // end of full click function()
 
 
-// When duck is shot, add to Duck Counter according to how many ducks there are
+/* THIS WORKS: 
 
-/*
-var duckCounter = 0;
-
-if duckCounter = 0;
-  change first duck to green
-  increment duckCounter
-
-if duckCounter = 1 etc...
-*/
-
-
-/*
-THIS KIND OF WORKS: 
- $(".duck").click(function() {
-   //debugger;
-     var greenDucks = $("svg.duck-svg");
-      for (i = 0; i < greenDucks.length; i++) {
-        $(greenDucks[i]).css({"fill":"#0f0"});
-      console.log(greenDucks);
-      i++;
-      }
-   });
-*/
-
-/* THIS WORKS: */
 var duckScore = 0;
 $(".duck").one("click", function() {
   // debugger;
@@ -138,29 +149,15 @@ $(".duck").one("click", function() {
        $(greenDucks[i]).css({"fill":"#0f0"});
      }
   });
+// DO NOT TOUCH ANYTHING ABOVE THIS ^^^^ */
 
 
-
-
-
-// When #content is clicked on, Bullet Counter goes down by one
-$("#content").on("click", function() {
-    $("svg.bullet-svg").css({"fill":"#333"}); 
-})
-
-
-// On click screen flashes
-$('#content').click(function() {
-    $('#content').addClass('flash');
-    setTimeout(function() {
-          $('#content').removeClass('flash');
-    }, 100);
-});
 
 
 
 // Calls each wave
-waveOne();
+waveOne(3, 6);
+
 
 
 
