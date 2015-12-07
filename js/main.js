@@ -25,7 +25,7 @@ $('#content').on("click", function() {
 
 function waveOne(numOfDucks, numOfBullets) {
 
-  var numOfBullets = numOfDucks + 3;
+  var bulletsLeft = numOfDucks + numOfBullets;
   var duckScore = 0;
   $(".duck").one("click", function() {
     duckScore += 500;
@@ -50,16 +50,16 @@ function waveOne(numOfDucks, numOfBullets) {
     }
 
     // Adds number of bullets according to admin input
-    for (i = 0; i < numOfBullets; i++) {
+    for (i = 0; i < bulletsLeft; i++) {
       $('.shots-left').append(bulletSVG);
     }
 
     // Sorting out how many shots are left:
 
     $("#content").on("click", function() {  
-      console.log("You have " + ((numOfBullets--) - 1) + " bullets left");
+      console.log("You have " + ((bulletsLeft--) - 1) + " bullets left");
      
-      if (numOfBullets === 0) {
+      if (bulletsLeft === 0) {
         $("#content").off("click");
         $(".duck").off("click");
         $("#content").fadeIn(gameOver);
@@ -174,8 +174,8 @@ $(".duck").one("click", function() {
 
 
 
-// Calls each wave
-waveOne(3, 6);
+// Calls each wave wave(numOfDucks, bulletsLeft)
+waveOne(3, 3);
 
 
 
