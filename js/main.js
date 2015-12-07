@@ -30,7 +30,9 @@ $('.duck').click(function() {
 
 
 // Easy mode - Level One
-$(singleDuck).css({"left": "80%"});
+
+// Starting 
+$(.duck).css({"left": "30%"});
 
 // Duck 1
 $(".duck:nth-child(1)").animate({"left":"85%", "top":"50%" }, 2000, "swing").delay(700).animate({"left":"50%", "top":"20%"}, 1000, "swing").delay(500).animate({"top":"50%", "left":"10%"}, 1250, "swing").delay(600).animate(flyAwayDuck, 400, "swing");
@@ -44,9 +46,9 @@ $(".duck:nth-child(3)").animate({"left":"25%", "top":"60%" }, 1500, "swing").del
 // Duck 4
 $(".duck:nth-child(4)").animate({"left":"30%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"30%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"23%", "left":"1%"}, 1250, "swing").delay(600).animate(flyAwayDuck, 400, "swing");
 
-
-$(".duck").on("click", function() {
-  $(this).stop(true, true);
+// Click a duck and it falls from the screen
+$(".duck").one("click", function() {
+  $(this).animate().stop(true, false).delay(600).animate({"top":"95%"}, 1000, "swing");
 })
 
 
