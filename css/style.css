@@ -1,12 +1,20 @@
 body {
   background: #555;
+  font-family: 'Press Start 2P', cursive;
+  color: #0f0;
 }
 
 h1 {
-  color: white;
+  color: #0f0;
+  font-family: 'Press Start 2P', cursive;
   text-shadow: 2px 2px 0px #333;
-  font-family: 'Open Sans', sans-serif;
   text-align: center;
+}
+
+h2, h3, h4, h5, h6 {
+  color: #0f0;
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1em;
 }
 
 .row {
@@ -40,23 +48,45 @@ img.duck {
   top: 90%;
   padding: 30px;
   border: 1px solid #333;
+  border-radius: 50%  ;
 }
+
+.row.scoreboard {
+  margin-top: 1em;
+  text-align: center;
+}
+
+svg {
+  width: 25px;
+  height: 25px;
+  margin-right: 5px;
+  fill: #222;
+  stroke: none;
+}
+
+
+
+svg.bullet-svg {
+  fill: #0f0;
+  width: auto
+}
+
 
 /* Background flash */
 
 .flash {
     -webkit-animation-name: flash-animation;
-    -webkit-animation-duration: 0.2s;
+    -webkit-animation-duration: 0.05s;
     animation-name: flash-animation;
-    animation-duration: 0.2s;
+    animation-duration: 0.05s;
 }
 
 @-webkit-keyframes flash-animation {  
     from { background: initial; }
-    to   { background: rgba(255,255,255,0.7); }
+    to   { background: rgba(255,255,255,0.9); }
 }
 
 @keyframes flash-animation {  
     from { background: initial; }
-    to   { background: rgba(255,255,255,0.7); }
+    to   { background: rgba(255,255,255,0.9); }
 }
