@@ -12,6 +12,15 @@ Monday at Home:
 - SVG background
 
 
+__________________________
+BUG: 
+Line 92 onwards
+"You ain't got no bullets"
+Checking bullet counter before checking if all ducks have been shot!
+__________________________
+
+
+
 
 D   NEED
 2   Two player - each player takes turns. Player one can have   
@@ -60,39 +69,4 @@ D   NICE-TO-HAVE
   - DOG
   class="dog"
   
-
-
-  **** BATTLESHIPS ****
-
-D   NEED  
-1   Board
-1   Pieces for the Board
-2   Five types of ship for each player
- 
-
-D   WANT  
-5   To host on internet so two players can play at once, 
-    laptops back to back - just like the original!
-2   To have the same design as the original
-
-D   NICE TO HAVE  
-3   Explosions when a ship has been sunk
-
-
-**** THIRD GAME ****
-
-D   NEED
-
-D   WANT
-
-D   NICE TO HAVE
-
-
-
-
-
-
-
-
-
 
