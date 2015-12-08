@@ -83,7 +83,20 @@ svg.bullet-svg {
   width: auto
 }
 
+a.button {
+  max-width: 50%;
+  display: block;
+  margin: 10em auto 0em;
+}
 
+a.button.give-up {
+  background: #FF2C10;
+  margin-top: 1em;
+}
+
+a.button.give-up:hover, a.button.give-up:active, a.button.give-up:focus {
+  background: #A51300;
+}
 
 
 /* Background flash */
