@@ -13,7 +13,6 @@ var bulletSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adob
 
 function animDuck(newDuck) {
   var duckAnimate = (Math.floor(Math.random()*10));
-  console.log(duckAnimate)
   switch(duckAnimate) {
 
     case 0:  
@@ -74,10 +73,16 @@ $('#content').on("click", function() {
 
 
 
-function wellDoneMessage() {
+function levelComplete(totalDucks, numOfBullets) {
   $("#content").html("<h2>Nice!</h2>");
+  setTimeout(function() {
+    // Getting this ready for round two:
+    //$(".duck").remove();
+    $('.shots-left').replaceWith();
+    $('.ducks-to-shoot').replaceWith();
+    $("#content").html("");
+  }, 3000);
 } 
-
 
 function bulletsAndKills(totalDucks, numOfBullets) {
   var totalBullets = totalDucks + numOfBullets 
@@ -109,7 +114,7 @@ function bulletsAndKills(totalDucks, numOfBullets) {
       $(".duck").off("click");
       if (numOfDucks < totalDucks) {
         // bug
-        $("#content").fadeIn("#content").html('<h2>Game Over</h2>');
+        $("#content").html('<h2>Game Over</h2>');
         console.log("You ain't got no bullets");
       }
     }
@@ -136,20 +141,8 @@ function scoresConditionals(totalDucks, numOfBullets) {
     
     if (numOfDucks == totalDucks  ) {
       console.log("WIN");
-      
-      // For some reason this doesn't work..?
-      wellDoneMessage();
-      setTimeout(function() {
-        // Getting this ready for round two:
-        $(".duck").remove();
-        $('.shots-left').replaceWith();
-        $('.ducks-to-shoot').replaceWith();
-
-        waveTwo(4,6);
-      }, 3000);
+      levelComplete(totalDucks, numOfBullets);
     }
-    
-
   }); // end of $(".duck").one("click");
 }
 
@@ -166,273 +159,23 @@ function killDuck() {
 
 function wave(totalDucks, numOfBullets) {
   // Add event listener to kill the ducks
-  killDuck(); 
+  
 
   // Print out ducks according to total duck:  
   for (i = 0; i < totalDucks; i++) {
     var newDuck = $(singleDuck);
     $("#content").append(newDuck);
     animDuck(newDuck);
-    console.log(newDuck)
+    
   }
   scoresConditionals(totalDucks, numOfBullets);
   bulletsAndKills(totalDucks, numOfBullets);
+  killDuck(); 
 }
 
-wave(6,-1);
-
-
-/* */ /* */ /* */
-// Wave Function
-/* */ /* */ /* */
-
-
-// Easy mode - Level One: Wave One
-function waveOne(totalDucks, numOfBullets) {
-
-  for (i = 0; i < totalDucks; i++) {
-    $("#content").append(singleDuck);
-  }
-
-  // Click a duck and it falls from the screen
-  $(".duck").one("click", function() {
-    $(this).animate().stop(true, false).delay(600).animate({"top":"95%"}, 1000, "swing");
-  }) // end of full click function()
-
-  var totalBullets = totalDucks + numOfBullets 
-  var bulletsLeft = totalBullets;
-  var duckScore = 0;
-  
-  $(".duck").one("click", function() {
-    duckScore += 500;
-    numOfDucks = (duckScore / 500);
-    $(".score").html(duckScore);
-    
-    var greenDucks = $("svg.duck-svg");
-    for (i = 0; i < numOfDucks; i++) {
-      $(greenDucks[i]).css({"fill":"#0f0"});
-    } 
-
-    // Check win
-    if (numOfDucks == totalDucks  ) {
-      console.log("WIN");
-      
-      // For some reason this doesn't work..?
-      function wellDoneMessage() {
-        setTimeout(function() {
-           $("#content").html("<h2>Nice!</h2>");
-         }, 700);
-      }    
-      setTimeout(function() {
-        // Getting this ready for round two:
-        $(".duck").remove();
-        $('.shots-left').replaceWith();
-        $('.ducks-to-shoot').replaceWith();
-
-        waveTwo(4,6);
-      }, 3000);
-    }
-
-  }); // end of $(".duck").one("click");
-
-  // Adds number of duck counters according to admin input
-  for (i = 0; i < totalDucks; i++) {
-    $('.ducks-to-shoot').append(duckSVG);
-  }
-
-  // Adds number of bullets according to admin input
-  for (i = 0; i < totalBullets; i++) {
-    $('.shots-left').append(bulletSVG);
-  }
-
-  // Sorting out how many shots are left:
-
-  $("#content").on("click", function() {  
-   // console.log("You have " + (bulletsLeft -1) + " bullets left");
-   bulletsLeft--;
-
-   var bullets = $("svg.bullet-svg");
-     for (i = totalBullets; i > bulletsLeft; i--) {
-       $(bullets[i-1]).css({"fill":"#333"});
-     }
-
-    if (bulletsLeft === 0) {
-      $("#content").off("click");
-      $(".duck").off("click");
-      if (numOfDucks < totalDucks) {
-        // bug
-        $("#content").fadeIn("#content").html('<h2>Game Over</h2>');
-        console.log("You ain't got no bullets");
-      }
-    }
-  })
-
-
-
-  // Starting 
-  $(".duck").css({"left": "30%"});
-
-  // Duck 1
-  $(".duck:nth-child(1)").animate({"left":"85%", "top":"50%" }, 2000, "swing").delay(700).animate({"left":"50%", "top":"20%"}, 1000, "swing").delay(500).animate({"top":"50%", "left":"10%"}, 1250, "swing").delay(600).animate(flyAwayDuck1, 400, "swing");
-
-  // Duck 2
-  $(".duck:nth-child(2)").animate({"left":"35%", "top":"30%" }, 1500, "swing").delay(650).animate({"left":"20%", "top":"35%"},950,"swing").delay(900).animate({"left":"70%", "top":"67%"}, 1000, "swing").delay(600).animate(flyAwayDuck1, 400, "swing");
-
-  // Duck 3
-  $(".duck:nth-child(3)").animate({"left":"25%", "top":"60%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"70%", "top":"67%"}, 1000, "swing").delay(300).animate(flyAwayDuck1, 400, "swing");
-
-} // End of waveOne();
-
-
-// Need to put in a STOP function() here
-// Level 2
-// Commence Wave 2
-
-
-
-
-// WAVE TWO
-
-
-function waveTwo(numOfDucks, numOfBullets) {
-  // bulletsLeft = 7;
- 
-// Add the ducks (not DRY!)
-$("#content").append('<img class="duck" src="images/duck.png" />');
-$("#content").append('<img class="duck" src="images/duck.png" />');
-$("#content").append('<img class="duck" src="images/duck.png" />');
-$("#content").append('<img class="duck" src="images/duck.png" />');
-
-var bulletsLeft = numOfDucks + numOfBullets;
-var duckScore = 0;
-$(".duck").one("click", function() {
-  duckScore += 500;
-  numOfDucks = (duckScore / 500);
-  $(".score").html(duckScore);
-    var greenDucks = $("svg.duck-svg");
-      for (i = 0; i < numOfDucks; i++) {
-        $(greenDucks[i]).css({"fill":"#0f0"});
-     }
-
-     // Check win
-     if (numOfDucks == greenDucks.length) {
-      $("#content").html("<h2>WINNER!</h2>");
-     }
-
-
-  });
-
-  // Adds number of duck counters according to admin input
-  for (i = 0; i < numOfDucks; i++) {
-    $('.ducks-to-shoot').append(duckSVG);
-  }
-
-  // Adds number of bullets according to admin input
-  for (i = 0; i < bulletsLeft; i++) {
-    $('.shots-left').append(bulletSVG);
-  }
-
-  // Sorting out how many shots are left:
-
-  $("#content").on("click", function() {  
-    console.log("You have " + ((bulletsLeft--) - 1) + " bullets left");
-   
-    if (bulletsLeft === 0) {
-      $("#content").off("click");
-      $(".duck").off("click");
-      $("#content").fadeIn(gameOver);
-    }
-  })
-
-  // Starting 
-  $(".duck:nth-child(1)").css({"left": "10%"});
-  $(".duck:nth-child(2)").css({"left": "60%"});
-  $(".duck:nth-child(3)").css({"left": "60%"});
-  $(".duck:nth-child(4)").css({"left": "80%"});
-
-  // Duck 1
-  $(".duck:nth-child(1)").animate({"left":"25%", "top":"40%" }, 1500, "swing").delay(700).animate({"left":"70%", "top":"27%"}, 1500, "swing").delay(500).animate({"top":"36%", "left":"10%"}, 1250, "swing").delay(600).animate({"left":"50%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-  // Duck 2
-  $(".duck:nth-child(2)").animate({"left":"0%", "top":"20%" }, 1500, "swing").delay(650).animate({"left":"60%", "top":"40%"},1450,"swing").delay(900).animate({"left":"60%", "top":"80%"}, 1000, "swing").delay(600).animate({"left":"80%","top":"5%"}, 1000, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-  // Duck 3
-  $(".duck:nth-child(3)").animate({"left":"35%", "top":"60%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"10%", "top":"57%"}, 1000, "swing").delay(300).animate({"left":"20%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-  // Duck 4
-  $(".duck:nth-child(4)").animate({"left":"30%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"30%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"63%", "left":"1%"}, 1250, "swing").delay(600).animate({"left":"29%","top":"45%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-} // End of waveTwo(); function
-
-
-
-
-//WAVE THREE
-
-function waveThree() {
-// Add the fifth duck
-$("#content").append('<img class="duck" src="images/duck.png" />');
-
-$(".duck:nth-child(1)").css({"left": "10%"});
-$(".duck:nth-child(2)").css({"left": "60%"});
-$(".duck:nth-child(3)").css({"left": "60%"});
-$(".duck:nth-child(4)").css({"left": "80%"});
-$(".duck:nth-child(5)").css({"left": "90%"});
-
-// Duck 1
-$(".duck:nth-child(1)").animate({"left":"25%", "top":"40%" }, 1500, "swing").delay(700).animate({"left":"70%", "top":"27%"}, 1500, "swing").delay(500).animate({"top":"36%", "left":"10%"}, 1250, "swing").delay(600).animate({"left":"50%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-// Duck 2
-$(".duck:nth-child(2)").animate({"left":"0%", "top":"20%" }, 1500, "swing").delay(650).animate({"left":"60%", "top":"40%"},1450,"swing").delay(900).animate({"left":"60%", "top":"80%"}, 1000, "swing").delay(600).animate({"left":"80%","top":"5%"}, 1000, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-// Duck 3
-$(".duck:nth-child(3)").animate({"left":"35%", "top":"60%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"10%", "top":"57%"}, 1000, "swing").delay(300).animate({"left":"20%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-// Duck 4
-$(".duck:nth-child(4)").animate({"left":"30%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"30%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"63%", "left":"1%"}, 1250, "swing").delay(600).animate({"left":"29%","top":"45%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-
-// Duck 5
-$(".duck:nth-child(5)").animate({"left":"20%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"20%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"63%", "left":"18%"}, 1250, "swing").delay(600).animate({"left":"29%","top":"45%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
-}
-
-
-
-
-
-
-// Click a duck and it falls from the screen
-$(".duck").one("click", function() {
-  $(this).animate().stop(true, false).delay(600).animate({"top":"95%"}, 1000, "swing");
-}) // end of full click function()
-
-
-
-
-/* THIS WORKS: 
-
-var duckScore = 0;
-$(".duck").one("click", function() {
-  // debugger;
-  duckScore += 500;
-
-  var numDucks = (duckScore / 500);
-  $(".score").html(duckScore);
-    var greenDucks = $("svg.duck-svg");
-     for (i = 0; i < numDucks; i++) {
-       $(greenDucks[i]).css({"fill":"#0f0"});
-     }
-  });
-// DO NOT TOUCH ANYTHING ABOVE THIS ^^^^ */
-
-
-
-
-
-// Calls each wave wave(numOfDucks, bulletsLeft)
-// waveOne(3, 3);
-
-
-
+// Calling the waves
+wave(4,2);
+wave(3,2);
 
 
 }); // End of $(document).ready
