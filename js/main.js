@@ -87,12 +87,13 @@ $(document).ready(function(){
   });
 
   function levelComplete(totalDucks, numOfBullets) {
-    $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
-    $("#content").append('<a href="" class="button give-up">Or give up...</a>');
+
     currentLevel++;
 
 
     if (currentLevel < levelParams.length) {
+      $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
+      $("#content").append('<a href="" class="button give-up">Or give up...</a>');
       $("#content a#nextLevel").on("click", function() {
         console.log("START NEXT");
         $('.shots-left').html("");
@@ -181,10 +182,6 @@ $(document).ready(function(){
     }) // end of full click function()
   }
 
-  /* */ /* */ /* */ /* */
-  //   Wave function   //
-  /* */ /* */ /* */ /* */
-
   function wave(totalDucks, numOfBullets) { 
       for (i = 0; i < totalDucks; i++) {
         var newDuck = $(singleDuck);
@@ -196,16 +193,7 @@ $(document).ready(function(){
     killDuck(); 
   }
 
-  //function levelOne()   { wave(4,3); }
-  //function levelTwo()   { wave(5,3); }
-  //function levelThree() { wave(6,2); }
-  
-
-
-
-
 // And start...
-//levelOne();
 wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
 
 }); // End of $(document).ready
