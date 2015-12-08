@@ -74,7 +74,7 @@ $(document).ready(function(){
   $('#content').on("click", function() {
       $('#content').addClass('flash');
       setTimeout(function() {
-            $('#content').removeClass('flash');
+        $('#content').removeClass('flash');
       }, 100);
   });
 
@@ -87,7 +87,8 @@ $(document).ready(function(){
       $('.ducks-to-shoot').html("");
       $("#content").html("");
       setTimeout(function(){ 
-        
+        console.log("totalDucks : " + totalDucks);
+        console.log("numOfBullets is: " + numOfBullets);
         wave(5,4)
       }, 1000);
     });
