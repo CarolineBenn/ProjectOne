@@ -13,10 +13,10 @@ $(document).ready(function(){
 
   $('#content').on("click", function() {
       $('#content').addClass('flash');
-      console.log(this)
       setTimeout(function() {
         $('#content').removeClass('flash');
       }, 100);
+      console.log("I've flashed on line 19!")
   });
 
   // Duck animation sequences
@@ -72,33 +72,23 @@ $(document).ready(function(){
 
   // On click screen flashes
 
-  $('#content').on("click", function() {
-      $('#content').addClass('flash');
-      setTimeout(function() {
-        $('#content').removeClass('flash');
-      }, 100);
-  });
 
   function levelComplete(totalDucks, numOfBullets) {
     $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
 
     $("#content a#nextLevel").on("click", function() {
-      // console.log("START NEXT");
+      console.log("START NEXT");
       $('.shots-left').html("");
       $('.ducks-to-shoot').html("");
       $("#content").html("");
       setTimeout(function(){ 
         wave(5,4);
+        console.log("I've just called wave2")
       }, 1000);
     });
 
     // NOTE: This really should skip to the (nonexistent) leaderboard - not refresh the page
     $("#content").append('<a href="" class="button give-up">Or give up...</a>');
-      // Getting this ready for round two:
-      //$(".duck").remove();
-
-      //$("#content").html("");
-    // move up a level
   } 
 
   function bulletsAndKills(totalDucks, numOfBullets) {
@@ -169,10 +159,6 @@ $(document).ready(function(){
     }) // end of full click function()
   }
 
-  /* */ /* */ /* */ /* */
-  //   Wave function   //
-  /* */ /* */ /* */ /* */
-
   function wave(totalDucks, numOfBullets) {
     // Add event listener to kill the ducks
     // Print out ducks according to total duck:  
@@ -188,7 +174,7 @@ $(document).ready(function(){
 
   // Starting the game with the first wave:
   function startGame() {
-    wave(1,2);
+    wave(4,2);
   }
 
 
