@@ -21,3 +21,8 @@
 
 <h3>Future Plans</h3>
 <p></p>
+<p>Other features for the future include:</p>
+<ul>
+  <li>Sound effects</li> 
+  <li>Secret Cheat Mode - in the menu, if you press up, down, left, right, A you may find that your bullet count will be 20 per level.</li>
+</ul>

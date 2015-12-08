@@ -87,6 +87,7 @@ a.button {
   max-width: 50%;
   display: block;
   margin: 10em auto 0em;
+  box-shadow: rgba(50,50,50,0.4);
 }
 
 a.button.give-up {
@@ -98,6 +99,13 @@ a.button.give-up:hover, a.button.give-up:active, a.button.give-up:focus {
   background: #A51300;
 }
 
+a#other-player {
+  background: #F0961E;
+}
+
+a#other-player:hover, a#other-player:active, a#other-player:focus {
+ background: #B36C0D;
+}
 
 /* Background flash */
 

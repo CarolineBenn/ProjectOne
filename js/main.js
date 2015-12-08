@@ -4,13 +4,17 @@ $(document).ready(function(){
   var flyAwayDuck1 = ({ "left" : "40%", "top":"-20%"});
   var flyAwayDuck2 = ({ "left" : "0%", "top":"-20%"});
   var gameOver;
+  var playerOne;
+  var playerTwo;
+  var currentPlayer = playerOne;
+  var duckScore = 0;
   var currentLevel = 0;
-  var levelParams =  [[1, 5], 
-                      [2, 3], 
-                      [3, 0]];
+  var levelParams =  [[3, 5], 
+                      [4, 3], 
+                      [3, 1]];
   // levelParams[0][0] = l1 ducks
   // levelParams[0][1] = l1 bullets
-
+  var levelTimer;
   var numOfDucks = 0;
   var bulletsLeft = 0;
   var duckSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" class="duck-svg" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="107.59px" height="107.59px" viewBox="0 0 107.59 107.59" style="enable-background:new 0 0 107.59 107.59;" xml:space="preserve"><g> <g> <path id="path5050" d="M96.264,34.699c-3.347-2.532-2.761,11.526-21.229,13.686c-6.061,0.707-11.467,0.123-16.271-1.017 c-3.056-0.717-3.266-2.931-1.117-5.208c4.146-4.382,6.692-10.292,6.692-16.804c0-13.518-10.953-24.47-24.467-24.47 c-9.802,0-18.25,5.758-22.158,14.075c-1.331,2.842-4.267,4.793-7.355,4.272C4.308,18.213,0,18.525,0,24.396 c0,5.9,7.381,11.777,16.339,16.008c2.835,1.335,2.868,3.211,0.267,4.966C7.755,51.313,1.925,61.412,1.925,72.876 c0,18.295,14.928,31.224,33.129,33.126c25.834,2.701,56.48-1.725,68.054-24.964C111.389,64.409,107.671,43.343,96.264,34.699"/> </g></g></svg>';
@@ -87,10 +91,8 @@ $(document).ready(function(){
   });
 
   function levelComplete(totalDucks, numOfBullets) {
-
     currentLevel++;
-
-
+    
     if (currentLevel < levelParams.length) {
       $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
       $("#content").append('<a href="" class="button give-up">Or give up...</a>');
@@ -103,11 +105,29 @@ $(document).ready(function(){
             wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
         }, 1000);
       });
-      // NOTE: This really should skip to the (nonexistent) leaderboard - not refresh the page
-     
     }
-    else {
-      console.log('the game is complete')
+    else  {
+      if (currentPlayer == playerOne) {
+      $("#content").html('<a class="button" id="other-player">Player Two - you\'re up!</a>');
+        playerOneScore = duckScore;
+        // Reset duckScore after the result is stored in playerOneScore
+        duckScore = 0;
+        currentLevel = 0;
+        currentPlayer = playerTwo;
+        
+        $("#content a#other-player").on("click", function() {
+                console.log("START NEXT");
+                $('.shots-left').html("");
+                $('.ducks-to-shoot').html("");
+                $("#content").html("");
+                setTimeout(function(){ 
+                    wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
+                }, 1000);
+              });
+      }
+      else {
+        // end of game, show scores
+      }
     }
   } 
 
@@ -138,6 +158,7 @@ $(document).ready(function(){
        }
        console.log("There are " + bulletsLeft + " bullets left");
 
+       /*
       if (bulletsLeft === 0) {
         $("#content").off("click");
         $(".duck").off("click");
@@ -147,6 +168,7 @@ $(document).ready(function(){
           console.log("You ain't got no bullets");
         }
       }
+      */
     })
   } // End of therAreXBulletsLeft();
 
@@ -154,11 +176,14 @@ $(document).ready(function(){
   function scoresConditionals(totalDucks, numOfBullets) {
     var totalBullets = totalDucks + numOfBullets 
     var bulletsLeft = totalBullets;
-    var duckScore = 0;
+
+    //var duckScore = 0;
+    numOfDucks = 0;
 
     $(".duck").one("click", function() {
       duckScore += 500;
-      numOfDucks = (duckScore / 500);
+      numOfDucks++;
+      //numOfDucks = (duckScore / 500);
       $(".score").html(duckScore);
       
       var greenDucks = $("svg.duck-svg");
@@ -166,10 +191,10 @@ $(document).ready(function(){
         $(greenDucks[i]).css({"fill":"#0f0"});
       } 
 
-      // Check win
-      
+      // Check win      
       if (numOfDucks == totalDucks  ) {
-        console.log("WIN");
+        // Stop timer from breaking next level:
+        clearTimeout(levelTimer);
         levelComplete(totalDucks, numOfBullets);
       }
     }); // end of $(".duck").one("click");
@@ -188,6 +213,11 @@ $(document).ready(function(){
         $("#content").append(newDuck);
         animDuck(newDuck);
       }
+
+    // ??? start timer, timer callback runs levelComplete
+    levelTimer = setTimeout(function() {
+      levelComplete(totalDucks, numOfBullets)}, 9000);
+
     scoresConditionals(totalDucks, numOfBullets);
     bulletsAndKills(totalDucks, numOfBullets);
     killDuck(); 
