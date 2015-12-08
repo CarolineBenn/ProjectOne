@@ -1,7 +1,6 @@
 <h1>Duck Hunt</h1>
 <h3>GA WDI Project One</h3>
-<br />
-
+<hr />
 <h3>The Build</h3>
 <ul>
   <li>HTML</li>
