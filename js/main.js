@@ -9,6 +9,57 @@ var duckSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE svg PUBLIC "
 
 var bulletSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" class="bullet-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 372.166 372.166" style="enable-background:new 0 0 372.166 372.166;" xml:space="preserve"><g>  <path d="M163.583,97.152h-3.641c-0.569-28.537-5.443-56.891-14.508-84.368l-2.609-7.909C141.863,1.959,139.154,0,136.083,0    c-3.071,0-5.781,1.959-6.742,4.875l-2.609,7.909c-9.065,27.477-13.938,55.832-14.508,84.368h-3.641v48.075l-11.749,30.56v179.012    h78.497V175.787l-11.748-30.56V97.152z M152.583,108.312v32.676h-33v-32.676H152.583z M117.769,151.988h36.628l7.427,19.32h-51.483    L117.769,151.988z M136.083,19.621c7.997,25.302,12.312,51.338,12.856,77.532h-25.711 C123.771,70.958,128.086,44.923,136.083,19.621z M107.834,343.799V182.308h56.497v161.491H107.834z"/><rect x="96.834" y="361.166" width="78.497" height="11"/></g></svg>';
    
+// Duck animation sequences
+
+function animDuck(newDuck) {
+  var duckAnimate = (Math.floor(Math.random()*10));
+  console.log(duckAnimate)
+  switch(duckAnimate) {
+
+    case 0:  
+    newDuck.animate({"left":"85%", "top":"50%" }, 2000, "swing").delay(700).animate({"left":"50%", "top":"20%"}, 1000, "swing").delay(500).animate({"top":"50%", "left":"10%"}, 1250, "swing").delay(600).animate(flyAwayDuck1, 400, "swing");
+    break;
+
+    case 1:
+    newDuck.animate({"left":"35%", "top":"30%" }, 1500, "swing").delay(650).animate({"left":"20%", "top":"35%"},950,"swing").delay(900).animate({"left":"70%", "top":"67%"}, 1000, "swing").delay(600).animate(flyAwayDuck1, 400, "swing");
+    break;
+
+    case 2:
+    newDuck.animate({"left":"25%", "top":"60%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"70%", "top":"67%"}, 1000, "swing").delay(300).animate(flyAwayDuck1, 400, "swing");
+    break;
+
+    case 3:
+    newDuck.animate({"left":"25%", "top":"40%" }, 1500, "swing").delay(700).animate({"left":"70%", "top":"27%"}, 1500, "swing").delay(500).animate({"top":"36%", "left":"10%"}, 1250, "swing").delay(600).animate({"left":"50%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+
+    case 4:
+    newDuck.animate({"left":"0%", "top":"20%" }, 1500, "swing").delay(650).animate({"left":"60%", "top":"40%"},1450,"swing").delay(900).animate({"left":"60%", "top":"80%"}, 1000, "swing").delay(600).animate({"left":"80%","top":"5%"}, 1000, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+    
+    case 5:
+    newDuck.animate({"left":"35%", "top":"60%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"10%", "top":"57%"}, 1000, "swing").delay(300).animate({"left":"20%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+    
+    case 6:
+    newDuck.animate({"left":"30%", "top":"10%" }, 1700, "swing").delay(1000).animate({"left":"30%", "top":"66%"}, 1000, "swing").delay(500).animate({"top":"63%", "left":"1%"}, 1250, "swing").delay(600).animate({"left":"29%","top":"45%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+
+    case 7:
+    newDuck.animate({"left":"25%", "top":"33%" }, 1500, "swing").delay(700).animate({"left":"70%", "top":"27%"}, 1500, "swing").delay(500).animate({"top":"36%", "left":"10%"}, 1250, "swing").delay(600).animate({"left":"50%","top":"15%"}, 1500, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+
+    case 8:
+    newDuck.animate({"left":"0%", "top":"25%" }, 1500, "swing").delay(650).animate({"left":"60%", "top":"40%"},1450,"swing").delay(900).animate({"left":"60%", "top":"80%"}, 1000, "swing").delay(600).animate({"left":"80%","top":"47%"}, 1000, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+
+    case 9:
+    newDuck.animate({"left":"35%", "top":"80%" }, 1500, "swing").delay(500).animate({"left":"20%", "top":"35%"},800,"swing").delay(900).animate({"left":"15%", "top":"80%"}, 1500, "swing").delay(300).animate({"left":"60%","top":"23%"}, 1000, "swing").delay(750).animate(flyAwayDuck2, 400, "swing");
+    break;
+    
+  } // End of switch()
+} // End of animDuck();
+
+
 
 // On click screen flashes
 
@@ -18,6 +69,8 @@ $('#content').on("click", function() {
           $('#content').removeClass('flash');
     }, 100);
 });
+
+
 
 
 
@@ -107,7 +160,6 @@ function killDuck() {
   }) // end of full click function()
 }
 
-
 /* */ /* */ /* */
 // Wave Function
 /* */ /* */ /* */
@@ -118,14 +170,16 @@ function wave(totalDucks, numOfBullets) {
 
   // Print out ducks according to total duck:  
   for (i = 0; i < totalDucks; i++) {
-    $("#content").append(singleDuck);
+    var newDuck = $(singleDuck);
+    $("#content").append(newDuck);
+    animDuck(newDuck);
+    console.log(newDuck)
   }
-
   scoresConditionals(totalDucks, numOfBullets);
   bulletsAndKills(totalDucks, numOfBullets);
 }
 
-wave(5,2);
+wave(6,-1);
 
 
 /* */ /* */ /* */
@@ -133,11 +187,7 @@ wave(5,2);
 /* */ /* */ /* */
 
 
-
-
 // Easy mode - Level One: Wave One
-
-
 function waveOne(totalDucks, numOfBullets) {
 
   for (i = 0; i < totalDucks; i++) {
