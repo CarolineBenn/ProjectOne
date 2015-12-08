@@ -4,7 +4,15 @@ $(document).ready(function(){
   var flyAwayDuck1 = ({ "left" : "40%", "top":"-20%"});
   var flyAwayDuck2 = ({ "left" : "0%", "top":"-20%"});
   var gameOver;
+  var currentLevel = 0;
+  var levelParams =  [[1, 5], 
+                      [2, 3], 
+                      [3, 0]];
+  // levelParams[0][0] = l1 ducks
+  // levelParams[0][1] = l1 bullets
+
   var numOfDucks = 0;
+  var bulletsLeft = 0;
   var duckSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" class="duck-svg" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="107.59px" height="107.59px" viewBox="0 0 107.59 107.59" style="enable-background:new 0 0 107.59 107.59;" xml:space="preserve"><g> <g> <path id="path5050" d="M96.264,34.699c-3.347-2.532-2.761,11.526-21.229,13.686c-6.061,0.707-11.467,0.123-16.271-1.017 c-3.056-0.717-3.266-2.931-1.117-5.208c4.146-4.382,6.692-10.292,6.692-16.804c0-13.518-10.953-24.47-24.467-24.47 c-9.802,0-18.25,5.758-22.158,14.075c-1.331,2.842-4.267,4.793-7.355,4.272C4.308,18.213,0,18.525,0,24.396 c0,5.9,7.381,11.777,16.339,16.008c2.835,1.335,2.868,3.211,0.267,4.966C7.755,51.313,1.925,61.412,1.925,72.876 c0,18.295,14.928,31.224,33.129,33.126c25.834,2.701,56.48-1.725,68.054-24.964C111.389,64.409,107.671,43.343,96.264,34.699"/> </g></g></svg>';
 
   var bulletSVG = '<?xml version="1.0" encoding="iso-8859-1"?><!-- Generator: Adobe Illustrator 18.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  --><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg version="1.1" class="bullet-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"   viewBox="0 0 372.166 372.166" style="enable-background:new 0 0 372.166 372.166;" xml:space="preserve"><g>  <path d="M163.583,97.152h-3.641c-0.569-28.537-5.443-56.891-14.508-84.368l-2.609-7.909C141.863,1.959,139.154,0,136.083,0    c-3.071,0-5.781,1.959-6.742,4.875l-2.609,7.909c-9.065,27.477-13.938,55.832-14.508,84.368h-3.641v48.075l-11.749,30.56v179.012    h78.497V175.787l-11.748-30.56V97.152z M152.583,108.312v32.676h-33v-32.676H152.583z M117.769,151.988h36.628l7.427,19.32h-51.483    L117.769,151.988z M136.083,19.621c7.997,25.302,12.312,51.338,12.856,77.532h-25.711 C123.771,70.958,128.086,44.923,136.083,19.621z M107.834,343.799V182.308h56.497v161.491H107.834z"/><rect x="96.834" y="361.166" width="78.497" height="11"/></g></svg>';
@@ -14,9 +22,8 @@ $(document).ready(function(){
   $('#content').on("click", function() {
       $('#content').addClass('flash');
       setTimeout(function() {
-        $('#content').removeClass('flash');
+            $('#content').removeClass('flash');
       }, 100);
-      console.log("I've flashed on line 19!")
   });
 
   // Duck animation sequences
@@ -72,28 +79,41 @@ $(document).ready(function(){
 
   // On click screen flashes
 
+  $('#content').on("click", function() {
+      $('#content').addClass('flash');
+      setTimeout(function() {
+        $('#content').removeClass('flash');
+      }, 100);
+  });
 
   function levelComplete(totalDucks, numOfBullets) {
     $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
-
-    $("#content a#nextLevel").on("click", function() {
-      console.log("START NEXT");
-      $('.shots-left').html("");
-      $('.ducks-to-shoot').html("");
-      $("#content").html("");
-      setTimeout(function(){ 
-        wave(5,4);
-        console.log("I've just called wave2")
-      }, 1000);
-    });
-
-    // NOTE: This really should skip to the (nonexistent) leaderboard - not refresh the page
     $("#content").append('<a href="" class="button give-up">Or give up...</a>');
+    currentLevel++;
+
+
+    if (currentLevel < levelParams.length) {
+      $("#content a#nextLevel").on("click", function() {
+        console.log("START NEXT");
+        $('.shots-left').html("");
+        $('.ducks-to-shoot').html("");
+        $("#content").html("");
+        setTimeout(function(){ 
+            wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
+        }, 1000);
+      });
+      // NOTE: This really should skip to the (nonexistent) leaderboard - not refresh the page
+     
+    }
+    else {
+      console.log('the game is complete')
+    }
   } 
 
   function bulletsAndKills(totalDucks, numOfBullets) {
     var totalBullets = totalDucks + numOfBullets 
-    var bulletsLeft = totalBullets;
+    bulletsLeft = totalBullets;
+    console.log("Bullets left inside bulletsAndKills", bulletsLeft);
 
     // Adds number of duck counters according to admin input
     for (i = 0; i < totalDucks; i++) {
@@ -106,6 +126,7 @@ $(document).ready(function(){
     }
 
     // Sorting out how many shots are left:
+    $("#content").off("click");
     $("#content").on("click", function() {  
      // console.log("You have " + (bulletsLeft -1) + " bullets left");
      bulletsLeft--;
@@ -114,6 +135,7 @@ $(document).ready(function(){
        for (i = totalBullets; i > bulletsLeft; i--) {
          $(bullets[i-1]).css({"fill":"#333"});
        }
+       console.log("There are " + bulletsLeft + " bullets left");
 
       if (bulletsLeft === 0) {
         $("#content").off("click");
@@ -159,9 +181,11 @@ $(document).ready(function(){
     }) // end of full click function()
   }
 
-  function wave(totalDucks, numOfBullets) {
-    // Add event listener to kill the ducks
-    // Print out ducks according to total duck:  
+  /* */ /* */ /* */ /* */
+  //   Wave function   //
+  /* */ /* */ /* */ /* */
+
+  function wave(totalDucks, numOfBullets) { 
       for (i = 0; i < totalDucks; i++) {
         var newDuck = $(singleDuck);
         $("#content").append(newDuck);
@@ -172,14 +196,17 @@ $(document).ready(function(){
     killDuck(); 
   }
 
-  // Starting the game with the first wave:
-  function startGame() {
-    wave(4,2);
-  }
+  //function levelOne()   { wave(4,3); }
+  //function levelTwo()   { wave(5,3); }
+  //function levelThree() { wave(6,2); }
+  
+
+
 
 
 // And start...
-startGame();
+//levelOne();
+wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
 
 }); // End of $(document).ready
 
