@@ -4,8 +4,8 @@ $(document).ready(function(){
   var flyAwayDuck1 = ({ "left" : "40%", "top":"-20%"});
   var flyAwayDuck2 = ({ "left" : "0%", "top":"-20%"});
   var gameOver;
-  var playerOne;
-  var playerTwo;
+  var playerOne = 'Player One';
+  var playerTwo = 'Player Two';
   var currentPlayer = playerOne;
   var duckScore = 0;
   var levelTimer;
@@ -93,7 +93,7 @@ $(document).ready(function(){
 
   function levelComplete(totalDucks, numOfBullets) {
     currentLevel++;
-    
+    console.log(currentPlayer + " is the current player")
     if (currentLevel < levelParams.length) {
       $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
       $("#content").append('<a class="button give-up" id="give-up">Or give up...</a>');
@@ -141,6 +141,7 @@ $(document).ready(function(){
         duckScore = 0;
         currentLevel = 0;
         currentPlayer = playerTwo;
+        console.log("Hopefully this should be p2:" + currentPlayer);
         
         $("#content a#other-player").on("click", function() {
                 console.log("START NEXT");
@@ -154,6 +155,22 @@ $(document).ready(function(){
       }
       else {
         // end of game, show scores
+
+          $("#content").html("<h1>Who is the winner?</h1>");
+          $("#content").append("<h3>Player One: " + playerOneScore + "</h3>");
+          $("#content").append("<h3>Player TwO: " + duckScore      + "</h3>");
+
+          if (playerOneScore > duckScore) {
+            $("#content").append("<h1>PLAYER ONE WINS!</h1>");
+          }
+          else if (duckScore > playerOneScore) {
+            $("#content").append("<h1>PLAYER TWO WINS!</h1>");
+          }
+          else {
+            $("#content").append("<h1>It's a tie!</h1>");
+          }
+
+
       }
     }
   } 
@@ -185,17 +202,13 @@ $(document).ready(function(){
        }
        console.log("There are " + bulletsLeft + " bullets left");
 
-       /*
+       
       if (bulletsLeft === 0) {
         $("#content").off("click");
         $(".duck").off("click");
-        if (numOfDucks < totalDucks) {
-          // bug
-          $("#content").html('<h2>Game Over</h2>');
-          console.log("You ain't got no bullets");
-        }
+         console.log("You ain't got no bullets");
       }
-      */
+      
     })
   } // End of therAreXBulletsLeft();
 
