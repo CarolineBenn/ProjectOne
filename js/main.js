@@ -165,23 +165,21 @@ $(document).ready(function(){
       else {
         // end of game, show scores
 
-          $("#content").html("<h1>Who is the winner?</h1>");
-          $("#content").append("<h3>Player One: " + playerOneScore + "</h3>");
-          $("#content").append("<h3>Player TwO: " + duckScore      + "</h3>");
+        $("#content").html("<h1>Who is the winner?</h1>");
+        $("#content").append("<h3>Player One: " + playerOneScore + "</h3>");
+        $("#content").append("<h3>Player TwO: " + duckScore      + "</h3>");
 
-          if (playerOneScore > duckScore) {
-            $("#content").append("<h1>PLAYER ONE WINS!</h1>");
-            $("#content").append(airhorn).append(airhorn);
-          }
-          else if (duckScore > playerOneScore) {
-            $("#content").append("<h1>PLAYER TWO WINS!</h1>");
-            $("#content").append(airhorn).append(airhorn);
-          }
-          else {
-            $("#content").append("<h1>It's a tie!</h1>");
-          }
-
-
+        if (playerOneScore > duckScore) {
+          $("#content").append("<h1>PLAYER ONE WINS!</h1>");
+          $("#content").append(airhorn + airhorn + airhorn + airhorn);
+        }
+        else if (duckScore > playerOneScore) {
+          $("#content").append("<h1>PLAYER TWO WINS!</h1>");
+          $("#content").append(airhorn + airhorn + airhorn + airhorn)
+        }
+        else {
+          $("#content").append("<h1>It's a tie!</h1>");
+        }
       }
     }
   } 
