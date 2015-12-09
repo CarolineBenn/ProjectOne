@@ -83,8 +83,6 @@ svg {
   stroke: none;
 }
 
-
-
 svg.bullet-svg {
   fill: #0f0;
   width: auto
@@ -117,6 +115,19 @@ a#other-player:hover, a#other-player:active, a#other-player:focus {
 a#are-you-sure {
   margin: 10em auto 0em;
 }
+
+img.airhorn {
+  display: inline-block;
+  margin: 0 auto;
+  -webkit-animation:spin 1.2s linear infinite;
+     -moz-animation:spin 1.2s linear infinite;
+          animation:spin 1.2s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+
 
 /* Background flash */
 

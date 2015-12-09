@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  var airhorn = ('<img class="airhorn" src="images/airhorn.png" />');
   var singleDuck = '<img class="duck" src="images/duck.png" />';
   var flyAwayDuck1 = ({ "left" : "40%", "top":"-20%"});
   var flyAwayDuck2 = ({ "left" : "0%", "top":"-20%"});
@@ -30,6 +30,12 @@ $(document).ready(function(){
             $('#content').removeClass('flash');
       }, 100);
   });
+
+  
+
+
+
+  
 
   // Duck animation sequences
 
@@ -93,6 +99,7 @@ $(document).ready(function(){
 
   function levelComplete(totalDucks, numOfBullets) {
     currentLevel++;
+    
     console.log(currentPlayer + " is the current player")
     if (currentLevel < levelParams.length) {
       $("#content").html('<a class="button" id="nextLevel">Nice! Go to the next level</a>');
@@ -138,7 +145,7 @@ $(document).ready(function(){
       $("#content").html('<a class="button" id="other-player">Player Two - you\'re up!</a>');
         playerOneScore = duckScore;
         // Reset duckScore after the result is stored in playerOneScore
-        duckScore = 0;
+        
         currentLevel = 0;
         currentPlayer = playerTwo;
         console.log("Hopefully this should be p2:" + currentPlayer);
@@ -148,6 +155,8 @@ $(document).ready(function(){
                 $('.shots-left').html("");
                 $('.ducks-to-shoot').html("");
                 $("#content").html("");
+                $(".score").html("0");
+                duckScore = 0;
                 setTimeout(function(){ 
                     wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
                 }, 1000);
@@ -162,9 +171,11 @@ $(document).ready(function(){
 
           if (playerOneScore > duckScore) {
             $("#content").append("<h1>PLAYER ONE WINS!</h1>");
+            $("#content").append(airhorn).append(airhorn);
           }
           else if (duckScore > playerOneScore) {
             $("#content").append("<h1>PLAYER TWO WINS!</h1>");
+            $("#content").append(airhorn).append(airhorn);
           }
           else {
             $("#content").append("<h1>It's a tie!</h1>");
@@ -264,6 +275,7 @@ $(document).ready(function(){
   }
 
 // And start...
+
 wave(levelParams[currentLevel][0], levelParams[currentLevel][1]);
 
 }); // End of $(document).ready
