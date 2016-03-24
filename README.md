@@ -11,7 +11,7 @@
   <li>Google Fonts</li>
 </ul>
 
-
+<a href="carolinebenn.github.io" target="_blank">Play!</a>
 
 <h3>How It Works</h3>
 <p>A remake of the classic NES game! </p>
